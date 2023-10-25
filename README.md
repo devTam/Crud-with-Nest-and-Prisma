@@ -1,6 +1,6 @@
 ## Description
 
-Nestjs/Prisma backend for feedback app using Postgres database
+Nestjs/Prisma backend for feedback app using Postgres database powered by Bun
 
 ## Installation
 
