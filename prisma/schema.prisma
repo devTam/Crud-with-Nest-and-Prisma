@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  name      String
+  password  String
+  feedbacks Feedback[]
+  comments  Comment[]
+  upvotes   Upvote[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Feedback {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  upvotes     Upvote[]
+  comments    Comment[]
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Comment {
+  id          Int       @id @default(autoincrement())
+  text        String
+  feedbackId  Int
+  feedback    Feedback  @relation(fields: [feedbackId], references: [id])
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    Int
+  replies     Comment[] @relation("CommentToComment")
+  comment     Comment?  @relation("CommentToComment", fields: [repliedToId], references: [id])
+  repliedToId Int?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Upvote {
+  id         Int      @id @default(autoincrement())
+  feedbackId Int
+  feedback   Feedback @relation(fields: [feedbackId], references: [id])
+  author     User     @relation(fields: [authorId], references: [id])
+  authorId   Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
