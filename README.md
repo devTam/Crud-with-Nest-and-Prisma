@@ -5,34 +5,41 @@ Nestjs/Prisma backend for feedback app using Postgres database powered by Bun
 ## Installation
 
 ```bash
-$ npm install
+$ bun install
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ bun start
 
 # watch mode
-$ npm run start:dev
+$ bun start:dev
 
 # production mode
-$ npm run start:prod
+$ bun start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ bun test
 
 # e2e tests
-$ npm run test:e2e
+$ bun test:e2e
 
 # test coverage
-$ npm run test:cov
+$ bun test:cov
 ```
+
+## Swagger Docs
+
+```bash
+$ /api
+```
+
 ## Features
 
 ```bash
